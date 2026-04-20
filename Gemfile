@@ -10,5 +10,5 @@ gem "sinatra-activerecord"
 gem "rake"
 
 group :test do
-    gem "rspec"
+  gem "rspec"
 end
