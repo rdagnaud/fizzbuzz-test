@@ -1,9 +1,9 @@
 module ErrorHandler
   def self.registered(app)
-    app.error AppError do
+    app.error 400 do
       error = env['sinatra.error']
 
-      status error.status
+      status 400
 
       content_type :json
       {
@@ -15,7 +15,7 @@ module ErrorHandler
     app.error ActiveRecord::ActiveRecordError do
       error = env['sinatra.error']
 
-      status 400
+      status 422
 
       content_type :json
       {

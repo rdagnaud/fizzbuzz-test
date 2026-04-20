@@ -4,7 +4,6 @@ require "json"
 
 require_relative "./src/services/fizzbuzz_service.rb"
 require_relative "./src/validators/fizzbuzz_validator.rb"
-require_relative "./src/errors/errors.rb"
 require_relative "./src/errors/error_handler.rb"
 
 register ErrorHandler
