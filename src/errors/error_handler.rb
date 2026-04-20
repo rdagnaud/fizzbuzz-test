@@ -1,20 +1,37 @@
+module ErrorHandler
+  def self.registered(app)
+    app.error AppError do
+      error = env['sinatra.error']
 
-  error BadRequestError do
-    error = env['sinatra.error']
+      status error.status
 
-    status error.status
-
-    content_type :json
-    {
+      content_type :json
+      {
         error: error.class.name,
         message: error.message
-    }.to_json
+      }.to_json
+    end
+
+    app.error ActiveRecord::ActiveRecordError do
+      error = env['sinatra.error']
+
+      status 400
+
+      content_type :json
+      {
+        error: error.class.name,
+        message: error.message
+      }.to_json
+    end
+
+    error do
+      status 500
+
+      content_type :json
+      {
+        error: "internal_server_error",
+        message: "An unexpected error occured"
+      }.to_json
+    end
   end
-
-  error ActiveRecord::ActiveRecordError do
-    error = env['sinatra.error']
-
-    status 400
-
-    content_type:json
-  end
+end
