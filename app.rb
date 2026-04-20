@@ -3,6 +3,7 @@ require "sinatra/activerecord"
 require "json"
 
 require_relative "./src/services/fizzbuzz_service.rb"
+require_relative "./src/services/stats_service.rb"
 require_relative "./src/validators/fizzbuzz_validator.rb"
 require_relative "./src/errors/error_handler.rb"
 
@@ -25,7 +26,11 @@ end
 get "/stats" do
   response = StatsService.stats
 
-  status 200
-  content_type :json
-  response.to_json
+  if response
+    status 200
+    content_type :json
+    response.to_json
+  else
+    status 204
+  end
 end

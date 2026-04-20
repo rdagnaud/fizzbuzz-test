@@ -4,13 +4,17 @@ class FizzbuzzService
     fizz_string, buzz_string = payload.values_at(:str1, :str2)
     fizzbuzz_array = []
 
-    Request.create!(
+    request = Request.find_or_create_by(
       int1: fizz_value,
       int2: buzz_value,
       limit: limit,
       str1: fizz_string,
       str2: buzz_string
     )
+
+    request.hits ||= 0
+    request.hits += 1
+    request.save!
 
     (1..limit).map do |i|
       string_to_add = ""

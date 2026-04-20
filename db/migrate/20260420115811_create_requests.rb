@@ -6,6 +6,7 @@ class CreateRequests < ActiveRecord::Migration[8.1]
       t.integer :limit, null: false
       t.string :str1, null: false
       t.string :str2, null: false
+      t.integer :hits, null: false
       t.timestamps
     end
 

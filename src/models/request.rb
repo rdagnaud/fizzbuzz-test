@@ -3,4 +3,6 @@ class Request < ActiveRecord::Base
             numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 1000000 }
 
   validates :str1, :str2, presence: true, length: { maximum: 100 }
+
+  validates :hits, presence: true, numericality: { only_integer: true, greater_than: 0 }
 end
