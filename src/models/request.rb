@@ -3,6 +3,4 @@ class Request < ActiveRecord::Base
             numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 1000000 }
 
   validates :fizz_string, :buzz_string, presence: true, length: { maximum: 100 }
-
-
 end
