@@ -1,20 +1,13 @@
-require "sinatra"
-require "sinatra/activerecord"
-require "json"
-
-require_relative "./src/services/fizzbuzz_service.rb"
-require_relative "./src/services/stats_service.rb"
-require_relative "./src/validators/fizzbuzz_validator.rb"
-require_relative "./src/errors/error_handler.rb"
+require_relative "./config/loader"
 
 register ErrorHandler
-
-set :database_file, "config/database.yml"
 
 post "/fizzbuzz" do
   payload = JSON.parse(request.body.read)
 
-  FizzbuzzValidator.validate_fizzbuzz(payload)
+  error = FizzbuzzValidator.validate_fizzbuzz(payload)
+
+  halt 400, { error: "bad_request", message: error }.to_json if error
 
   response = FizzbuzzService.fizzbuzz(payload)
 
