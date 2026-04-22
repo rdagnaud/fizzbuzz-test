@@ -31,6 +31,17 @@ RSpec.describe "App" do
       expect(json["error"]).to eq("bad_request")
       expect(json["message"]).to eq("failed validation")
     end
+
+    it "should respond 400 if JSON is invalid" do
+      post "/fizzbuzz", "{", { "CONTENT_TYPE" => "application/json" }
+
+      expect(last_response.status).to eq(400)
+
+      json = JSON.parse(last_response.body)
+
+      expect(json["error"]).to eq("bad_request")
+      expect(json["message"]).to eq("Invalid JSON")
+    end
   end
 
   describe "GET /stats" do

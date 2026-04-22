@@ -6,6 +6,7 @@ class App < Sinatra::Base
   # Without this, Sinatra bypasses the error_handler
   configure do
     set :raise_errors, false
+    set :show_exceptions, false
   end
 
   register ErrorHandler

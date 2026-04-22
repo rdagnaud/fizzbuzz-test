@@ -12,6 +12,16 @@ module ErrorHandler
       }.to_json
     end
 
+    app.error JSON::ParserError do
+      status 400
+
+      content_type :json
+      {
+        error: "bad_request",
+        message: "Invalid JSON"
+      }.to_json
+    end
+
     app.error do
       status 500
 
