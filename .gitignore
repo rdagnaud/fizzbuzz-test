@@ -1,6 +1,3 @@
-*.log
-.bundle
-
 # SQLite db files
 *.sqlite3
 *.sqlite3-shm
