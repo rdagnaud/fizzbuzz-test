@@ -1,4 +1,6 @@
 ENV["APP_ENV"] = "test"
+ENV["DB_NAME"] = "db/test.sqlite3"
+
 require_relative "../config/loader"
 require_relative "../app"
 
@@ -6,6 +8,10 @@ require_relative "../app"
     Resets the test database before each test to prevent unexpected behaviors
 =end
 RSpec.configure do |config|
+  config.before(:suite) do
+    load "db/schema.rb"
+  end
+
   config.before(:each) do
     ActiveRecord::Base.connection.tables.each do |table|
       next if table == "schema_migrations"
