@@ -1,7 +1,7 @@
 class FizzbuzzService
   def self.fizzbuzz(payload)
     fizz_value, buzz_value, limit = payload.values_at("int1", "int2", "limit").map{ |n| n.to_i }
-    fizz_string, buzz_string = payload.values_at("str1", "str2")
+    fizz_string, buzz_string = payload.values_at("str1", "str2").map{ |s| s.to_s }
     fizzbuzz_array = []
 
     request = Request.find_or_create_by(

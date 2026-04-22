@@ -21,10 +21,10 @@ class FizzbuzzValidator
 
     string_parameters = payload.values_at("str1", "str2")
 
-    return "Strings must not be empty" if string_parameters.any?{ |s| s.empty? }
+    return "Strings must not be empty" if string_parameters.any?{ |s| s.to_s.empty? }
 
     # Adding an arbitrary upper limit to string size
-    return "Strings must be maximum 100 characters long" if string_parameters.any?{ |s| s.length > 100 }
+    return "Strings must be maximum 100 characters long" if string_parameters.any?{ |s| s.to_s.length > 100 }
 
     nil
   end
