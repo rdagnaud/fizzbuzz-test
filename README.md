@@ -158,6 +158,7 @@ bundle exec ruby tasks/reset_db.rb
 │
 ├── config/
 │   ├── database.rb               # ActiveRecord connection setup
+│   ├── database.yml              # Database configuration for rake
 │   └── loader.rb                 # Bundler + auto-require for src/
 │
 ├── db/
