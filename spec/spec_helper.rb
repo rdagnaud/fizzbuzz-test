@@ -1,5 +1,4 @@
 ENV["APP_ENV"] = "test"
-ENV["DB_NAME"] = "db/test.sqlite3"
 
 require_relative "../config/loader"
 require_relative "../app"
