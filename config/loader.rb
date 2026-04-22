@@ -1,5 +1,5 @@
 require "bundler/setup"
-Bundler.require
+Bundler.require(:default, ENV.fetch("APP_ENV", "development").to_sym)
 
 require_relative "./database"
 

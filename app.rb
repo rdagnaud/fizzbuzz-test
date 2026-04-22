@@ -1,29 +1,38 @@
 require_relative "./config/loader"
 
-register ErrorHandler
+class App < Sinatra::Base
+  # Used to be able to catch errors in error_handler to respond a custom internal_server_error message
+  # instead of the full trace
+  # Without this, Sinatra bypasses the error_handler
+  configure do
+    set :raise_errors, false
+  end
 
-post "/fizzbuzz" do
-  payload = JSON.parse(request.body.read)
+  register ErrorHandler
 
-  error = FizzbuzzValidator.validate_fizzbuzz(payload)
+  post "/fizzbuzz" do
+    payload = JSON.parse(request.body.read)
 
-  halt 400, { error: "bad_request", message: error }.to_json if error
+    error = FizzbuzzValidator.validate(payload)
 
-  response = FizzbuzzService.fizzbuzz(payload)
+    halt 400, { error: "bad_request", message: error }.to_json if error
 
-  status 200
-  content_type :json
-  response.to_json
-end
+    response = FizzbuzzService.fizzbuzz(payload)
 
-get "/stats" do
-  response = StatsService.stats
-
-  if response
     status 200
     content_type :json
     response.to_json
-  else
-    status 204
+  end
+
+  get "/stats" do
+    response = StatsService.stats
+
+    if response
+      status 200
+      content_type :json
+      response.to_json
+    else
+      status 204
+    end
   end
 end

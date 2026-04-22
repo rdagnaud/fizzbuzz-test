@@ -1,9 +1,9 @@
 class FizzbuzzValidator
 
 =begin
-  validate_fizzbuzz checks if the payload parameters are valid
+  validate checks if the payload parameters are valid
 =end
-  def self.validate_fizzbuzz(payload)
+  def self.validate(payload)
     required_keys = ["int1", "int2", "limit", "str1", "str2"]
 
     missing_keys = required_keys - payload.keys
