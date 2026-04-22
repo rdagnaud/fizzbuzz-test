@@ -193,6 +193,5 @@ bundle exec ruby tasks/reset_db.rb
 |---------------|--------------------------|-------------------------------|
 | `APP_ENV`     | `development`            | Runtime environment           |
 | `DB_ADAPTER`  | `sqlite3`                | ActiveRecord adapter          |
-| `DB_NAME`     | `db/development.sqlite3` | Path to the SQLite3 database  |
 
 The test suite sets `APP_ENV=test` automatically, which isolates it to a separate database file (`db/test.sqlite3`).
