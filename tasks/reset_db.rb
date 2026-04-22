@@ -1,3 +1,8 @@
+=begin
+    Basic ruby script to reset the database (clearing all data) while keeping migrations
+    Useful for development testing
+=end
+
 require_relative "../config/database.rb"
 
 env = ENV.fetch("APP_ENV", "development")
