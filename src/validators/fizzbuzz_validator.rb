@@ -15,8 +15,8 @@ class FizzbuzzValidator
     # As fizzbuzz logic starts at 1, limit should be 1 or greater
     return "Integers must be 1 or greater" if integer_parameters.any?{ |n| n.to_i < 1 }
 
-    # Adding an arbitrary upper limit for the integers parameters (to avoid excessive process time and response size in limit case,
-    # and to add a boundary in int1 and int2 cases)
+    # Adding an arbitrary upper limit for the integers parameters (to avoid excessive process time and
+    # response size in limit case, and to add a boundary in int1 and int2 cases)
     return "Integers must be 1000000 or smaller" if integer_parameters.any?{ |n| n.to_i > 1000000 }
 
     string_parameters = payload.values_at("str1", "str2")
