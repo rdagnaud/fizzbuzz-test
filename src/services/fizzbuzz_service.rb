@@ -4,22 +4,23 @@ class FizzbuzzService
     fizz_string, buzz_string = payload.values_at("str1", "str2").map{ |s| s.to_s }
     fizzbuzz_array = []
 
-    request = Request.find_or_create_by(
-      int1: fizz_value,
-      int2: buzz_value,
-      limit: limit,
-      str1: fizz_string,
-      str2: buzz_string
-    )
-
     # Initializing hits at 1 if the request hasn't been done before
-    # and using increment! method to increment hits while avoiding race conditions
-    request.hits ||= 1
+    # Using a transcation + lock to avoid race conditions
+    Request.transaction do
+      request = Request.lock.find_or_initialize_by(
+        int1: fizz_value,
+        int2: buzz_value,
+        limit: limit,
+        str1: fizz_string,
+        str2: buzz_string
+      )
 
-    if request.new_record?
-      request.save!
-    else
-      request.increment!(:hits)
+      if request.new_record?
+        request.hits = 1
+        request.save!
+      else
+        request.increment!(:hits)
+      end
     end
 
     (1..limit).map do |i|
